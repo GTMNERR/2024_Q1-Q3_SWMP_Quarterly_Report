@@ -29,22 +29,22 @@ The following includes variables that establish the estuarine setting: rainfall,
 
 ## Summary
 
-Rainfall totals for the second quarter of 2024 exceeded the totals for the first quarter (@fig-rainfall). June had the greatest monthly total rainfall for 2024 so far (@fig-rainfall-2), but both January and February had the greatest number of rain days exceeding 10 mm/day (@fig-rainfall-3). 
+Rainfall totals for the third quarter of 2024 exceeded the totals for the first and second quarters combined (@fig-rainfall). September had the greatest monthly total rainfall for 2024 (@fig-rainfall-2). September also had the greatest number of rain days exceeding 10 mm/day (@fig-rainfall-3) and more storms producing heavy rainfall (@fig-rainfall-4). 
 <!-- Winter storm Finn (unofficially named) brought rainfall and strong winds in [January](https://www.actionnewsjax.com/news/local/strong-storm-cold-front-will-move-across-northeast-florida-southeast-georgia/DNJ3SOGJ35G4FCKJLPJNP67YZY/) to Northeast Florida causing some local schools to release students early and cancel after school activities (@fig-rainfall-1; @fig-rainfall-2). This event is discussed in further detail in the next chapter. -->
 
-The start of Quarter 2 was dry with little to no rain, except for the one day in April with over 30 mm of rain and May 13-15 when the area received heavy rains and strong winds. As the drought conditions continued into June, the light intensity was high, especially mid-day (@fig-lightintensity). 
+September 2004 had the second highest monthly rainfall total recorded at the Pellicer Creek weather station (@tbl-topRain) and had the greated amount of rainfall when compared to annual September data (@fig-SeptPrecip; @fig-SeptPrecip-1; @fig-SeptPrecip-2). Total rainfall so far in 2024 is 1090.9 mm (@fig-SeptPrecip-3).
 
-Daily average air temperatures were variable during the first part of the year but surprisingly fell within the historical range for the GTMNERR station through June (@fig-range-atemp). January and March experienced a few daily average air temperature extremes below and above the average range (@fig-range-atemp). 
+Light intensity remained high in July and August but decreased drastically in September (@fig-lightintensity). 
 
-While there were some low water temperatures in January, daily water temperature averages were generally higher than average throughout the spring and early summer (@fig-range-temp). The changes in daily averages were observed at all four stations, though more pronounced at San Sebastian and Fort Matanzas, the stations close to inlets (@fig-range-temp-2; @fig-range-temp-3).
+Daily average air temperatures were variable during the first part of the year but surprisingly fell within the historical range for the GTMNERR station through September (@fig-range-atemp). January and March experienced a few daily average air temperature extremes below and above the average range (@fig-range-atemp). 
 
-Rainfall in January brought salinities lower than their average daily ranges (@fig-range-sal), particularly at the stations farthest from the inlets (@fig-range-sal-1; @fig-range-sal-4). However, the drought conditions in spring made salinity levels rise. Salinities stayed above the average daily range at all stations in June but was most pronounced at Pine Island (@fig-range-sal-1).
+While there were some low water temperatures in January, daily water temperature averages were generally higher than average throughout the spring and early summer (@fig-range-temp). Water temperature decreased in August and September with the onset of the large rain events and as a result water temperatures were below the historic average daily range at all four stations (@fig-range-temp-2; @fig-range-temp-3).
+
+Rainfall in January brought salinities lower than their average daily ranges (@fig-range-sal), particularly at the stations farthest from the inlets (@fig-range-sal-1; @fig-range-sal-4). However, the drought conditions in spring made salinity levels rise. Salinities stayed above the average daily range at all stations through July but was most pronounced at Pine Island (@fig-range-sal-1). Salinity levels decreased to below the historic average daily range at all four stations in late August through September (@fig-range-sal-1; @fig-range-sal-2; @fig-range-sal-3; @fig-range-sal-4).
 
 ## Data
 
 ### Rainfall
-
-Data is  presented as quarterly totals, then monthly, and then daily totals as "rain days" which are categorized into Wet (\<10 mm), Very Wet (20-29 mm), and Extremely Wet (\>30 mm) days. 
 
 ```{r}
 #| label: fig-rainfall
@@ -91,16 +91,16 @@ MET |>
   # summarise(mean = mean(sum)) %>%
   ggplot(aes(x = month, y = sum)) +
   geom_col(fill = "#0075AC") +
-  geom_hline(yintercept = 69.8, linewidth = 1, linetype = "dashed", color = "grey50") +
+  geom_hline(yintercept = 121.2, linewidth = 1, linetype = "dashed", color = "grey50") +
   geom_text(aes(label = sum), vjust = 1.5, color = "white") +
   scale_y_continuous(expand = c(0,0)) +
   theme_classic() +
   theme(axis.text = element_text(color = "black", size = 12),
         axis.title.y = element_text(color = "black", size = 12)) +
-  geom_text(aes(x = "Mar", y = 75), 
-            label = "69.8 mm",
-            size = 4.5,
-            color = "grey50") +
+  # geom_text(aes(x = "Mar", y = 75), 
+  #           label = "69.8 mm",
+  #           size = 4.5,
+  #           color = "grey50") +
   labs(x = '',
        y = 'Precipitation (mm)',
        caption = "Hortizontal line represents monthly average.")
@@ -144,6 +144,8 @@ MET |>
 # rainfall intensity 
 # in mm/hr
 
+fun_in <- function(x) sum(x, na.rm = TRUE)
+
 MET |>
   filter(datetimestamp > '2024-01-01 00:15'& datetimestamp < '2024-10-01 00:00') %>% 
   aggreswmp(by = "hours", FUN = fun_in, params = "totprcp") %>% 
@@ -175,6 +177,114 @@ MET |>
   labs(x = "",
        y = "Amount of Hours",
        fill = "Intensity Category")
+```
+
+```{r}
+#| label: tbl-topRain
+#| echo: false
+#| tbl-cap: "Top five highest monthly rainfall totals."
+
+# MET %>% 
+#   (filter(datetimestamp < '2024-10-01 00:00'))
+
+Monthly_PRCP<-aggreswmp(MET, 'months', function(x) sum(x, na.rm = T), 
+params = 'totprcp')
+
+Monthly_PRCP$Month <- format(Monthly_PRCP$datetimestamp, "%b")
+Monthly_PRCP$Year <- year(Monthly_PRCP$datetimestamp)
+
+TopValues <- Monthly_PRCP %>% 
+  top_n(5, totprcp) %>%
+  arrange(desc(totprcp)) 
+
+TopValues %>%
+  select(Month,Year,totprcp) %>% 
+  rename(`Total Precipitation` = 'totprcp') %>% 
+  kbl(align = "c") %>%
+  kable_styling(fixed_thead = T) %>% 
+  column_spec(3, border_left = T)
+
+```
+
+```{r}
+#| label: fig-SeptPrecip
+#| echo: false
+#| fig.cap: Rainfall at the Pellicer Creek weather station.
+#| fig.subcap:
+#|    - "Total precipitation for September 2002-2024."
+#|    - "Monthly total precipitation 2002-2024."
+#|    - "Total precipitation 2002-2004."
+#|    - "Annual precipitation totals 2002-2024."
+#| layout-ncol: 2
+## September Precip ----
+
+Monthly_PRCP %>%
+  filter(Month == "Sep", na.rm=TRUE) %>%
+  ggplot(aes(Year, totprcp)) +
+  geom_col(fill = "#0075AC") +
+  theme_classic() +
+  theme(axis.text = element_text(color = "black", size = 12), #angle=45, vjust=1, hjust=1),
+        axis.title.y = element_text(color = "black", size = 12)) +
+  #scale_x_date(date_labels = "%y") +
+  labs(title = "", x = "", y = "Precipitation (mm)")
+
+## MONTHLY/YEAR ----
+
+# Plotting
+ggplot(Monthly_PRCP, aes(datetimestamp, totprcp)) +
+  geom_segment(aes(x=datetimestamp, xend=datetimestamp, y=0, yend=totprcp), colour = "#0075AC") +
+  theme_classic() +
+  theme(axis.text = element_text(color = "black", size = 12),
+        axis.title.y = element_text(color = "black", size = 12)) +
+labs(title = "", x = "", y = "Precipitation (mm)")
+
+## Seasonal Precip ----
+# seasonal_barplot(MET, param = 'totprcp')
+
+## BOXPLOT ----
+# raw_boxplot(MET, param = 'totprcp')
+
+# seasonal_boxplot(MET, param = 'totprcp', target_yr = 2024)
+
+ggplot(Monthly_PRCP, aes(x = Month, y = totprcp, fill = Month)) + 
+  geom_boxplot(fill = "#56B4E9") +
+  scale_x_discrete(limits = c('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')) +
+  theme_classic() +
+  theme(axis.text = element_text(color = "black", size = 12),
+        axis.title.y = element_text(color = "black", size = 12)) +
+  labs(x = '',
+       y = 'Precipitation (mm)')
+
+## YEAR ----
+
+# Plotting
+
+fun_in <- function(x) sum(x, na.rm = TRUE)
+
+MET |> 
+  filter(datetimestamp > '2003-01-01 00:15' & datetimestamp < '2024-10-01 00:00') %>%
+  aggreswmp(by = "years", FUN = fun_in, params = "totprcp") %>% 
+  ggplot(aes(datetimestamp, totprcp)) +
+  geom_col(fill = "#0075AC") +
+  theme_classic() +
+  theme(axis.text = element_text(color = "black", size = 12), #angle=45, vjust=1, hjust=1),
+        axis.title.y = element_text(color = "black", size = 12)) +
+  geom_text(aes(label = totprcp), vjust = -0.5, color = "black", size = 2) +
+  labs(title = "", x = "", y = "Precipitation (mm)")
+
+#Another way
+
+# Monthly_PRCP %>%
+#   ggplot(aes(Year, totprcp)) +
+#   geom_col(fill = "#0075AC") +
+#   theme_classic() +
+#   theme(axis.text = element_text(color = "black", size = 12), #angle=45, vjust=1, hjust=1),
+#         axis.title.y = element_text(color = "black", size = 12)) +
+#   geom_text(aes(label = totprcp), vjust = 1.5, color = "white") +
+#   #scale_x_date(date_labels = "%y") +
+#   labs(title = "", x = "", y = "Total Annual Precipitation (mm)")
+
+
 ```
 
 ### Light Intensity
