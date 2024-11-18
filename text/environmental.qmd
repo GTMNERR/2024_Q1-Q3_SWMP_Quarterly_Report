@@ -192,6 +192,7 @@ params = 'totprcp')
 
 Monthly_PRCP$Month <- format(Monthly_PRCP$datetimestamp, "%b")
 Monthly_PRCP$Year <- year(Monthly_PRCP$datetimestamp)
+Monthly_PRCP$Month_number <- month(Monthly_PRCP$datetimestamp)
 
 TopValues <- Monthly_PRCP %>% 
   top_n(5, totprcp) %>%
@@ -213,8 +214,8 @@ TopValues %>%
 #| fig.subcap:
 #|    - "Total precipitation for September 2002-2024."
 #|    - "Monthly total precipitation 2002-2024."
-#|    - "Total precipitation 2002-2004."
-#|    - "Annual precipitation totals 2002-2024."
+#|    - "Annual precipitation totals Jan 2002- Sept 2024."
+#|    - "Annual precipitation totals Jan 2002- Sept 2024."
 #| layout-ncol: 2
 ## September Precip ----
 
@@ -246,14 +247,39 @@ labs(title = "", x = "", y = "Precipitation (mm)")
 
 # seasonal_boxplot(MET, param = 'totprcp', target_yr = 2024)
 
-ggplot(Monthly_PRCP, aes(x = Month, y = totprcp, fill = Month)) + 
-  geom_boxplot(fill = "#56B4E9") +
-  scale_x_discrete(limits = c('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')) +
-  theme_classic() +
-  theme(axis.text = element_text(color = "black", size = 12),
-        axis.title.y = element_text(color = "black", size = 12)) +
-  labs(x = '',
-       y = 'Precipitation (mm)')
+# box_rain <- ggplot(Monthly_PRCP, aes(x = Month, y = totprcp, fill = Month)) + 
+#   geom_boxplot(fill = "#56B4E9") +
+#   scale_x_discrete(limits = c('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')) +
+#   geom_point(data = filter(Monthly_PRCP, Year == 2024), 
+#                  aes(color = "2024"), size = 4) +
+#   scale_color_manual(name = "", values = c("2024" = "red")) +
+#   scale_fill_manual(name = "", values = c("2002-2024" = "white")) +
+#   theme_classic() +
+#   theme(legend.position = "bottom", axis.text = element_text(color = "black", size = 12),
+#         axis.title.y = element_text(color = "black", size = 12)) +
+#   labs(x = '',
+#        y = 'Precipitation (mm)')
+#   box_rain
+
+#Boxplots another way
+
+boxplot_prcp <- ggplot(data = Monthly_PRCP, 
+                      aes(x = Month, y = totprcp)) +
+      geom_boxplot(data = filter(Monthly_PRCP, Year < 2024), 
+                   aes(fill = "2002-2024")) +
+      geom_point(data = filter(Monthly_PRCP, Year == 2024), 
+                 aes(color = "2024"),
+                 size = 4) +
+      scale_x_discrete(limits = c('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')) +
+      scale_color_manual(name = "", 
+                         values = c("2024" = "red")) +
+      scale_fill_manual(name = "",
+                        values = c("2002-2024" = "white")) +
+      theme_classic() +
+      theme(legend.position = "bottom",
+            axis.text = element_text(color = "black")) +
+      labs(x = "", y = 'Precipitation (mm)')
+    boxplot_prcp
 
 ## YEAR ----
 
