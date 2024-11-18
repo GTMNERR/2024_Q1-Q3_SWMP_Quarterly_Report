@@ -265,9 +265,9 @@ agm(station = "gtmpcnut",
 
 #### Total Nitrogen
 
-TN is calculated by adding TKN and NO23. It accounts for the inorganic nitrogen fraction as well as larger pools of organic bioavailable forms.  -->
+TN is calculated by adding TKN and NO23. It accounts for the inorganic nitrogen fraction as well as larger pools of organic bioavailable forms.
 
-Several of the NO23 values fell below the Florida Department of Environmental Protection Central Lab's minimum detection limit and therefore TN was not able to be calculated and is missing for quite a few months at all the stations (@fig-tn-boxplots). This was especially true at Fort Matanzas which has the least amount of TN data (@fig-tn-boxplots-3). -->
+Several of the NO23 values fell below the Florida Department of Environmental Protection Central Lab's minimum detection limit and therefore TN was not able to be calculated and is missing for quite a few months at all the stations (@fig-tn-boxplots). This was especially true at Fort Matanzas which has the least amount of TN data (@fig-tn-boxplots-3).
 
 ```{r}
 #| label: fig-tn-boxplots
