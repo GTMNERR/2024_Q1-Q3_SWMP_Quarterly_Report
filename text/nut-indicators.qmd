@@ -35,13 +35,17 @@ By visiting [Florida Rules](https://www.flrules.org/gateway/ruleno.asp?id=62-302
 
 ## Summary
 
-Daily average dissolved oxygen values were mostly within or above their average ranges in the first half of the year (@fig-do); however, daily averages did fall below the average range at Pellicer Creek in January (@fig-do-4) which had above average and below daily average range. In previous years, dissolved oxygen values at Pine Island (@fig-do-pi-1) and Pellicer Creek (@fig-do-pc-1) frequently fell below the 2 mg/L hypoxia threshold, but so far in 2024, there have not been any dissolved oxygen readings below that threshold (@fig-do-pi-2, (@fig-do-pc-2). 
+Daily average dissolved oxygen values were mostly within or above their average ranges so far in 2024 (@fig-do); however, Pine Island and Pellicer Creek (@fig-do; @fig-do-4) had above average and below daily average range. In previous years, dissolved oxygen values at Pine Island (@fig-do-pi-1) and Pellicer Creek (@fig-do-pc-1) frequently fell below the 2 mg/L hypoxia threshold, but so far in 2024, there have not been any dissolved oxygen readings below that threshold (@fig-do-pi-2, (@fig-do-pc-2). 
 
-Chlorophyll *a* values were often higher than average at all stations this year, especially at Pine Island and San Sebastian (@fig-chla-boxplots). Annual geometric mean (AGM) chlorophyll a values were high and above the state threshold levels at all stations, except for Fort Matanzas (@fig-chla-boxplots). Elevated chlorophyll *a* was observed at Pine Island (@fig-chla-boxplots-1) and at Pellicer Creek in Q2 (@fig-chla-boxplots-4). Annual geometric mean (AGM) chlorophyll *a* values were high and above the state threshold levels at all stations, except for Fort Matanzas  (@fig-chla-agm), (@fig-chla-agm-3). The AGM will likely change for all stations as more data are added throughout the year.
+Chlorophyll *a* values were often higher than average at all stations this year, especially at Pine Island, San Sebastian, and Pellicer Creek (@fig-chla-boxplots). Annual geometric mean (AGM) chlorophyll *a* values were high and above the state threshold levels at all stations, except for Fort Matanzas (@fig-chla-boxplots). Annual geometric mean (AGM) chlorophyll *a* values were high and above the state threshold levels at all stations, except for Fort Matanzas  (@fig-chla-agm), (@fig-chla-agm-3). The AGM will likely change for all stations as more data are added throughout the year.
 
-Total Kjeldahl Nitrogen (TKN) concentrations were higher than average at all stations in January and March, but concentrations were lower in Quarter 2 (@fig-tkn-boxplots). 
+Ammonium (NH4) concentrations for 2024 were below monthly means most of year at all four stations (@fig-nh4-boxplots). Concentrations were above average at the two southern sites, Fort Matanzas and Pellicer Creek in September (@fig-nh4-boxplots-3; @fig-nh4-boxplots-4) but were below average at Pine Island and San Sebastian (@fig-nh4-boxplots-1; @fig-nh4-boxplots-2).
 
-Total phosphorus concentrations were below the state threshold at all stations in the first half of 2024 with the exception of February at Pine Island which was missing data (@fig-tp-boxplots). Fort Matanzas experienced higher than average TP values for January -- March (@fig-tp-boxplots-3) and San Sebastian had lower than average TP values for February -- June. Relatively high levels of orthophosphate were observed at Pine Island and San Sebastian in January (@fig-tp-boxplots-1, @fig-tp-boxplots-2) and below average levels were found in April -- June for San Sebastian, Fort Matanzas, and Pellicer Creek (@fig-tp-boxplots-2, (@fig-tp-boxplots-3).
+Total Kjeldahl Nitrogen (TKN) concentrations were higher than average at all stations in January and March, but concentrations were lower most of Q2 and Q3 (@fig-tkn-boxplots). Concentrations in September were above average for Fort Matanzas and Pellicer Creek (@fig-tkn-boxplots-3; @fig-tkn-boxplots-4)
+
+Total phosphorus concentrations were below the state threshold at all stations in 2024 with the exception of February at Pine Island which was missing data (@fig-tp-boxplots). Fort Matanzas experienced higher than average TP values for January -- March and July (@fig-tp-boxplots-3) and San Sebastian had lower than average TP values for February -- September. 
+
+Relatively high levels of orthophosphate were observed at Pine Island and San Sebastian in January (@fig-tp-boxplots-1, @fig-tp-boxplots-2) and below average levels were found in April -- June for San Sebastian, Fort Matanzas, and Pellicer Creek (@fig-tp-boxplots-2, (@fig-tp-boxplots-3).
 
 ## Data
 
@@ -88,16 +92,16 @@ threshold_criteria_plot(pi, param = 'do_mgl', rng = c(2019, 2024),
                         threshold_labs = c('Poor', 'Fair', 'Good'), 
                         monthly_smooth = TRUE, 
                         threshold_cols = c('#FEC596', '#FFFFCC', '#ABD9E9')) +
-  theme(axis.text = element_text(color = "black", size = 18),
-        axis.title.y = element_text(size = 20))
+  theme(axis.text = element_text(color = "black", size = 12),
+        axis.title.y = element_text(size = 14))
 
 threshold_criteria_plot(pi, param = 'do_mgl', rng = c(2024, 2024), 
                         thresholds = c(2,5),
                         threshold_labs = c('Poor', 'Fair', 'Good'), 
                         monthly_smooth = TRUE, 
                         threshold_cols = c('#FEC596', '#FFFFCC', '#ABD9E9')) +
-  theme(axis.text = element_text(color = "black", size = 18),
-        axis.title.y = element_text(size = 20))
+  theme(axis.text = element_text(color = "black", size = 12),
+        axis.title.y = element_text(size = 14))
 
 ```
 
@@ -117,8 +121,8 @@ threshold_criteria_plot(pc, param = 'do_mgl', rng = c(2019, 2024),
                         threshold_labs = c('Poor', 'Fair', 'Good'), 
                         monthly_smooth = TRUE, 
                         threshold_cols = c('#FEC596', '#FFFFCC', '#ABD9E9')) +
-  theme(axis.text = element_text(color = "black", size = 18),
-        axis.title.y = element_text(size = 20))
+  theme(axis.text = element_text(color = "black", size = 12),
+        axis.title.y = element_text(size = 14))
 
 
 
@@ -127,8 +131,8 @@ threshold_criteria_plot(pc, param = 'do_mgl', rng = c(2024, 2024),
                         threshold_labs = c('Poor', 'Fair', 'Good'), 
                         monthly_smooth = TRUE, 
                         threshold_cols = c('#FEC596', '#FFFFCC', '#ABD9E9')) +
-  theme(axis.text = element_text(color = "black", size = 18),
-        axis.title.y = element_text(size = 20))
+  theme(axis.text = element_text(color = "black", size = 12),
+        axis.title.y = element_text(size = 14))
 
 ```
 
@@ -259,13 +263,13 @@ agm(station = "gtmpcnut",
 
 ### Nitrogen
 
-<!-- #### Total Nitrogen -->
+#### Total Nitrogen
 
-<!-- TN is calculated by adding TKN and NO23. It accounts for the inorganic nitrogen fraction as well as larger pools of organic bioavailable forms.  -->
+TN is calculated by adding TKN and NO23. It accounts for the inorganic nitrogen fraction as well as larger pools of organic bioavailable forms.  -->
 
-<!-- Several of the NO23 values fell below the Florida Department of Environmental Protection Central Lab's minimum detection limit and therefore TN was not able to be calculated and is missing for quite a few months at all the stations (@fig-tn-boxplots). This was especially true at Fort Matanzas which has the least amount of TN data (@fig-tn-boxplots-3). -->
+Several of the NO23 values fell below the Florida Department of Environmental Protection Central Lab's minimum detection limit and therefore TN was not able to be calculated and is missing for quite a few months at all the stations (@fig-tn-boxplots). This was especially true at Fort Matanzas which has the least amount of TN data (@fig-tn-boxplots-3). -->
 
-<!--```{r}
+```{r}
 #| label: fig-tn-boxplots
 #| echo: false
 #| fig.cap: Historical monthly total nitrogen at each SWMP water quality station with current year monthly value overlaid in red. Horizontal dashed blue line indicates the state threshold, as found in F.A.C 62-302.530.
@@ -274,56 +278,56 @@ agm(station = "gtmpcnut",
 #|    - "San Sebastian"
 #|    - "Fort Matanzas"
 #|    - "Pellicer Creek"
-#| layout-ncol: 2-->
+#| layout-ncol: 2
 
-<!-- boxplot_currentyear(station = "gtmpinut",  -->
-<!--                      param = tn, -->
-<!--                      threshold = TRUE, -->
-<!--                      thres_val = 0.65) + -->
-<!--   labs(y = "Mean Monthly Total Nitrogen (mg/L)") + -->
-<!--   annotate("text", -->
-<!--            x = "Jun", -->
-<!--            y = 1.2, -->
-<!--            size = 3, -->
-<!--            color = "blue", -->
-<!--            label = "State Threshold 0.65 (mg/L)") -->
+boxplot_currentyear(station = "gtmpinut",
+                     param = tn,
+                     threshold = TRUE,
+                     thres_val = 0.65) + 
+  labs(y = "Mean Monthly Total Nitrogen (mg/L)") +
+  annotate("text", 
+           x = "Jun",
+           y = 1.2,
+           size = 3,
+            color = "blue",
+            label = "State Threshold 0.65 (mg/L)")
 
-<!-- boxplot_currentyear(station = "gtmssnut",  -->
-<!--                     param = tn, -->
-<!--                     threshold = TRUE, -->
-<!--                     thres_val = 0.55) + -->
-<!--   labs(y = "Mean Monthly Total Nitrogen (mg/L)") + -->
-<!--   annotate("text", -->
-<!--            x = "Jun", -->
-<!--            y = 1.0, -->
-<!--            size = 3, -->
-<!--            color = "blue", -->
-<!--            label = "State Threshold 0.55 (mg/L)") -->
+ boxplot_currentyear(station = "gtmssnut",
+                     param = tn,
+                     threshold = TRUE,
+                     thres_val = 0.55) +
+   labs(y = "Mean Monthly Total Nitrogen (mg/L)") +
+   annotate("text",
+            x = "Jun", 
+            y = 1.0,
+            size = 3,
+            color = "blue",
+            label = "State Threshold 0.55 (mg/L)")
 
-<!-- boxplot_currentyear(station = "gtmfmnut",  -->
-<!--                      param = tn,  -->
-<!--                      threshold = TRUE, -->
-<!--                      thres_val = 0.55) + -->
-<!--   labs(y = "Mean Monthly Total Nitrogen (mg/L)") + -->
-<!--   annotate("text", -->
-<!--            x = "Jun", -->
-<!--            y = 1.0, -->
-<!--            size = 3, -->
-<!--            color = "blue", -->
-<!--            label = "State Threshold 0.55 (mg/L)") -->
+ boxplot_currentyear(station = "gtmfmnut",
+                      param = tn,
+                      threshold = TRUE,
+                      thres_val = 0.55) +
+   labs(y = "Mean Monthly Total Nitrogen (mg/L)") +
+   annotate("text",
+            x = "Jun",
+            y = 1.0,
+            size = 3,
+            color = "blue",
+            label = "State Threshold 0.55 (mg/L)")
 
-<!-- boxplot_currentyear(station = "gtmpcnut",  -->
-<!--                      param = tn,  -->
-<!--                      threshold = TRUE, -->
-<!--                      thres_val = 1.10) + -->
-<!--   labs(y = "Mean Monthly Total Nitrogen (mg/L)") + -->
-<!--   annotate("text", -->
-<!--            x = "Jun", -->
-<!--            y = 1.7, -->
-<!--            size = 3, -->
-<!--            color = "blue", -->
-<!--            label = "State Threshold 1.10 (mg/L)") -->
-<!--```-->
+ boxplot_currentyear(station = "gtmpcnut",
+                      param = tn,
+                      threshold = TRUE,
+                      thres_val = 1.10) +
+   labs(y = "Mean Monthly Total Nitrogen (mg/L)") +
+   annotate("text",
+            x = "Jun",
+            y = 1.7,
+            size = 3,
+            color = "blue",
+            label = "State Threshold 1.10 (mg/L)")
+```
 
 #### Ammonium
 
@@ -359,6 +363,42 @@ boxplot_currentyear(station = "gtmpcnut",
                      param = nh4f, 
                      threshold = FALSE) +
  labs(y = "Mean Monthly Ammonium (mg/L)")
+
+
+```
+
+#### Nitrite + Nitrate
+
+```{r}
+#| label: fig-no23-boxplots
+#| echo: false
+#| fig.cap: Historical monthly ammonium at each SWMP water quality station with current year monthly value overlaid in red. 
+#| fig.subcap:
+#|    - "Pine Island"
+#|    - "San Sebastian"
+#|    - "Fort Matanzas"
+#|    - "Pellicer Creek"
+#| layout-ncol: 2
+
+boxplot_currentyear(station = "gtmpinut", 
+                     param = no23f, 
+                     threshold = FALSE) +
+ labs(y = "Mean Monthly Nitrite + Nitrate (mg/L)") 
+
+boxplot_currentyear(station = "gtmssnut", 
+                     param = no23f, 
+                     threshold = FALSE) +
+ labs(y = "Mean Monthly Nitrite + Nitrate (mg/L)")
+
+boxplot_currentyear(station = "gtmfmnut", 
+                     param = no23f, 
+                     threshold = FALSE) +
+ labs(y = "Mean Monthly Nitrite + Nitrate (mg/L)")
+
+boxplot_currentyear(station = "gtmpcnut", 
+                     param = no23f, 
+                     threshold = FALSE) +
+ labs(y = "Mean Monthly Nitrite + Nitrate (mg/L)")
 
 
 ```
