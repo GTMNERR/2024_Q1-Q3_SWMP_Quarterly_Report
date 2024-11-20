@@ -214,8 +214,8 @@ TopValues %>%
 #| fig.subcap:
 #|    - "Total precipitation for September 2002-2024."
 #|    - "Monthly total precipitation 2002-2024."
-#|    - "Annual precipitation totals Jan 2002- Sept 2024."
-#|    - "Annual precipitation totals Jan 2002- Sept 2024."
+#|    - "Annual precipitation totals Jan 2002-Sept 2004."
+#|    - "Annual precipitation totals Jan 2002-Sept 2024."
 #| layout-ncol: 2
 ## September Precip ----
 
