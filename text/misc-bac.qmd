@@ -104,7 +104,7 @@ ggplot(aes(x = date, y = entero_mpn)) +
   facet_wrap(~station_code, scales = "free_y", ncol = 1) +
   khroma::scale_color_okabeito() + # change color codes
   scale_y_continuous(expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b-%y") +
+  scale_x_date(date_breaks = "3 month", date_labels = "%b-%y") +
   theme_classic() +
   theme(axis.text = element_text(color = "black"),
         axis.title.y = element_text(color = "black"),
@@ -141,7 +141,7 @@ ggplot(aes(x = date, y = feccol_cfu)) +
   facet_wrap(~station_code, scales = "free_y", ncol = 1) +
   khroma::scale_color_okabeito() + # change color codes
   scale_y_continuous(expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 year", date_labels = "%b-%y") +
+  scale_x_date(date_breaks = "3 month", date_labels = "%b-%y") +
   theme_classic() +
   theme(axis.text = element_text(color = "black"),
         axis.title.y = element_text(color = "black"),
