@@ -372,7 +372,7 @@ boxplot_currentyear(station = "gtmpcnut",
 ```{r}
 #| label: fig-no23-boxplots
 #| echo: false
-#| fig.cap: Historical monthly ammonium at each SWMP water quality station with current year monthly value overlaid in red. 
+#| fig.cap: Historical monthly nitrite + nitrate at each SWMP water quality station with current year monthly value overlaid in red. 
 #| fig.subcap:
 #|    - "Pine Island"
 #|    - "San Sebastian"
